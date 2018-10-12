@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Tuntikirjaus.Controllers
 {
-    public class HomeController : Controller
+    public class Tuntikirjaus : Controller
     {
         public ActionResult Index()
         {
