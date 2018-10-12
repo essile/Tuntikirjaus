@@ -1,7 +1,65 @@
-﻿
+﻿@model IEnumerable<Tuntikirjaus.Models.Tuntikirjaus>
+
 @{
     ViewBag.Title = "Raportti";
 }
 
 <h2>Raportti</h2>
 
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.pvm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tunnit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.kuvaus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.laskutettava)
+        </th>
+        <th>
+            Nimi
+        </th>        
+
+        <th>
+            @Html.DisplayNameFor(model => model.Projekti.nimi)
+        </th>
+        @*<th></th>*@
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.pvm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tunnit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.kuvaus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.laskutettava)
+        </td>
+        <td>
+            <a href="/Tuntikirjaus/Raportti/@Html.DisplayFor(modelItem => item.Henkilo.henkilo_id)">
+            @Html.DisplayFor(modelItem => item.Henkilo.sukunimi),
+            @Html.DisplayFor(modelItem => item.Henkilo.etunimi)
+                </a>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Projekti.nimi)
+        </td>
+        @*<td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.tuntikirjaus_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.tuntikirjaus_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.tuntikirjaus_id })
+        </td>*@
+    </tr>
+}
+
+</table>

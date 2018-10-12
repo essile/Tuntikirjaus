@@ -246,9 +246,9 @@
     <Content Include="Views\Tuntikirjaus\About.cshtml" />
     <Content Include="Views\Tuntikirjaus\Contact.cshtml" />
     <Content Include="Views\Tuntikirjaus\Index.cshtml" />
-    <Content Include="Views\Tuntikirjaus\Raportti.cshtml" />
     <Content Include="Views\Tuntikirjaus\UusiTyontekija.cshtml" />
     <Content Include="Views\Tuntikirjaus\Tuntikirjaus.cshtml" />
+    <Content Include="Views\Tuntikirjaus\Raportti.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

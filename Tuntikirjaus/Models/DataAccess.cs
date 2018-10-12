@@ -17,7 +17,7 @@ namespace Tuntikirjaus.Models
         public static List<SelectListItem> HaeOsastoIdt()
         {
             List<SelectListItem> lista = new List<SelectListItem>();
-            foreach(Osasto o in HaeOsastot())
+            foreach (Osasto o in HaeOsastot())
             {
                 lista.Add(new SelectListItem() { Text = o.nimi, Value = o.osasto_id.ToString() });
             }
@@ -54,6 +54,18 @@ namespace Tuntikirjaus.Models
                 lista.Add(new SelectListItem() { Text = p.KokoNimi(), Value = p.henkilo_id.ToString() });
             }
             return lista;
+        }
+
+        public static object HaeTuntiKirjaukset(int id)
+        {
+            if (id == -1)
+            {
+                return db.Tuntikirjaukset.ToList();
+            }
+            else
+            {
+                return db.Tuntikirjaukset.Where(t => t.henkilo_id == id).ToList();
+            }
         }
     }
 }

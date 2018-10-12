@@ -69,11 +69,11 @@ namespace Tuntikirjaus.Controllers
             return View();
         }
 
-        public ActionResult Raportti()
+        public ActionResult Raportti(int id = -1)
         {
             ViewBag.Message = "Tarkastele työtunteja";
 
-            return View();
+            return View(DataAccess.HaeTuntiKirjaukset(id));
         }
     }
 }
