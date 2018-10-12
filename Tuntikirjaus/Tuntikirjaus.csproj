@@ -192,6 +192,9 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Tuntikirjaus.cshtml" />
+    <Content Include="Views\Home\uusityontekija.cshtml" />
+    <Content Include="Views\Home\Raportti.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

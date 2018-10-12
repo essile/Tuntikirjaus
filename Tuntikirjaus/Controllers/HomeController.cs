@@ -26,5 +26,26 @@ namespace Tuntikirjaus.Controllers
 
             return View();
         }
+
+        public ActionResult Tuntikirjaus()
+        {
+            ViewBag.Message = "Uusi tuntikirjaus";
+
+            return View();
+        }
+
+        public ActionResult UusiTyontekija()
+        {
+            ViewBag.Message = "Uusi työntekijä";
+
+            return View();
+        }
+
+        public ActionResult Raportti()
+        {
+            ViewBag.Message = "Tarkastele työtunteja";
+
+            return View();
+        }
     }
 }
