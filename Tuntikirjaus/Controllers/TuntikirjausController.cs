@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Tuntikirjaus.Models;
 
 namespace Tuntikirjaus.Controllers
 {
@@ -36,9 +37,21 @@ namespace Tuntikirjaus.Controllers
 
         public ActionResult UusiTyontekija()
         {
+            
             ViewBag.Message = "Uusi työntekijä";
-
+            ViewData["osasto_id"] = DataAccess.HaeOsastoIdt();
+            
             return View();
+        }
+
+        [HttpPost]
+        public string UusiTyontekija(Henkilo h)
+        {
+
+            ViewBag.Message = "Uusi työntekijä";
+            DataAccess.LisääHenkilö(h);
+
+            return "Onnistui";
         }
 
         public ActionResult Raportti()

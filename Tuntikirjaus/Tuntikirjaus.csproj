@@ -159,6 +159,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DataAccess.cs" />
     <Compile Include="Models\Henkilo.cs">
       <DependentUpon>TuntikirjausModel.tt</DependentUpon>
     </Compile>
@@ -245,8 +246,8 @@
     <Content Include="Views\Tuntikirjaus\Contact.cshtml" />
     <Content Include="Views\Tuntikirjaus\Index.cshtml" />
     <Content Include="Views\Tuntikirjaus\Tuntikirjaus.cshtml" />
-    <Content Include="Views\Tuntikirjaus\uusityontekija.cshtml" />
     <Content Include="Views\Tuntikirjaus\Raportti.cshtml" />
+    <Content Include="Views\Tuntikirjaus\UusiTyontekija.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
