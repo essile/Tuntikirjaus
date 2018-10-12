@@ -59,12 +59,14 @@ namespace Tuntikirjaus.Controllers
         }
 
         [HttpPost]
-        public string UusiTyontekija(Henkilo h)
+        public ActionResult UusiTyontekija(Henkilo h)
         {
             ViewBag.Message = "Uusi työntekijä";
-            DataAccess.LisääHenkilö(h);
+            ViewBag.Onnistui = DataAccess.LisääHenkilö(h);
 
-            return "Onnistui";
+            ViewData["osasto_id"] = DataAccess.HaeOsastoIdt();
+
+            return View();
         }
 
         public ActionResult Raportti()

@@ -10,11 +10,11 @@
 {
     if (ViewBag.Onnistui)
     {
-        <p>Onnistui</p>
+        <div class="alert alert-success" role="alert">Onnistui</div>
     }
     else
     {
-        <p>ei onnistunut</p>
+        <div class="alert alert-warning" role="alert">Ei onnistunut</div>
     }
 }
 @using (Html.BeginForm())
