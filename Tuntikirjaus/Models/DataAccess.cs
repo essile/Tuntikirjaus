@@ -29,5 +29,31 @@ namespace Tuntikirjaus.Models
             db.Henkilot.Add(h);
             return db.SaveChanges() != 0;
         }
+
+        public static List<SelectListItem> HaeProjektiIdt()
+        {
+            List<SelectListItem> lista = new List<SelectListItem>();
+            foreach (Projekti p in db.Projektit)
+            {
+                lista.Add(new SelectListItem() { Text = p.nimi, Value = p.projekti_id.ToString() });
+            }
+            return lista;
+        }
+
+        public static bool LisaaTuntikirjaus(Tuntikirjaus t)
+        {
+            db.Tuntikirjaukset.Add(t);
+            return db.SaveChanges() != 0;
+        }
+
+        public static List<SelectListItem> HaeHenkiloIdt()
+        {
+            List<SelectListItem> lista = new List<SelectListItem>();
+            foreach (Henkilo p in db.Henkilot)
+            {
+                lista.Add(new SelectListItem() { Text = p.KokoNimi(), Value = p.henkilo_id.ToString() });
+            }
+            return lista;
+        }
     }
 }

@@ -13,17 +13,23 @@
         <p>
            Lisää uuden työntekijän tiedot täällä.
         </p>
-        <p><a class="btn btn-default" href="http://localhost:53834/Home/uusityontekija">Lisää työntekijä &raquo;</a></p>
+        <p>
+            @Html.ActionLink("Lisää uusi työntekijä >>", "uusiTyontekija", null, null, new { @class = "btn btn-default" })
+        </p>
     </div>
     <div class="col-md-4">
         <h2>Kirjaa työtuntisi</h2>
         <p>Kirjaa päivittäiset työtuntisi täällä.</p>
-        <p><a class="btn btn-default" href="http://localhost:53834/Home/Tuntikirjaus/">Kirjaa tunnit &raquo;</a></p>
+        <p>
+            @Html.ActionLink("Kirjaa tuntisi >>", "Tuntikirjaus", null, null, new { @class = "btn btn-default" })
+        </p>
     </div>
     <div class="col-md-4">
         <h2>Tarkastele työtunteja</h2>
         <p>Tarkastele aiemmin kirjattuja tunteja täällä.</p>
-        <p><a class="btn btn-default" href="http://localhost:53834/Home/Raportti">Tarkastele tunteja &raquo;</a></p>
-        @Html.ActionLink("Uusi työntekijä", "UusiTyontekija");
+        <p>
+            @Html.ActionLink("Tarkastele tunteja >>", "Raportti", null, null, new { @class = "btn btn-default" })
+        </p>
+        
     </div>
 </div>
