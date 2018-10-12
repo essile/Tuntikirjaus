@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TuntikirjausModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Henkilo">
+          <Key>
+            <PropertyRef Name="henkilo_id" />
+          </Key>
+          <Property Name="henkilo_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="etunimi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="sukunimi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="osasto_id" Type="int" Nullable="false" />
+          <Property Name="tehtavanimike" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Osasto">
+          <Key>
+            <PropertyRef Name="osasto_id" />
+          </Key>
+          <Property Name="osasto_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nimi" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Projekti">
+          <Key>
+            <PropertyRef Name="projekti_id" />
+          </Key>
+          <Property Name="projekti_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nimi" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tuntikirjaus">
+          <Key>
+            <PropertyRef Name="tuntikirjaus_id" />
+          </Key>
+          <Property Name="tuntikirjaus_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="henkilo_id" Type="int" Nullable="false" />
+          <Property Name="projekti_id" Type="int" Nullable="false" />
+          <Property Name="pvm" Type="date" Nullable="false" />
+          <Property Name="tunnit" Type="decimal" Precision="3" Scale="1" Nullable="false" />
+          <Property Name="kuvaus" Type="text" />
+          <Property Name="laskutettava" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Henkilo_Osasto">
+          <End Role="Osasto" Type="Self.Osasto" Multiplicity="1" />
+          <End Role="Henkilo" Type="Self.Henkilo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Osasto">
+              <PropertyRef Name="osasto_id" />
+            </Principal>
+            <Dependent Role="Henkilo">
+              <PropertyRef Name="osasto_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tuntikirjaus_Henkilo">
+          <End Role="Henkilo" Type="Self.Henkilo" Multiplicity="1" />
+          <End Role="Tuntikirjaus" Type="Self.Tuntikirjaus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Henkilo">
+              <PropertyRef Name="henkilo_id" />
+            </Principal>
+            <Dependent Role="Tuntikirjaus">
+              <PropertyRef Name="henkilo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tuntikirjaus_Projekti">
+          <End Role="Projekti" Type="Self.Projekti" Multiplicity="1" />
+          <End Role="Tuntikirjaus" Type="Self.Tuntikirjaus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projekti">
+              <PropertyRef Name="projekti_id" />
+            </Principal>
+            <Dependent Role="Tuntikirjaus">
+              <PropertyRef Name="projekti_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TuntikirjausModelStoreContainer">
+          <EntitySet Name="Henkilo" EntityType="Self.Henkilo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Osasto" EntityType="Self.Osasto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Projekti" EntityType="Self.Projekti" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tuntikirjaus" EntityType="Self.Tuntikirjaus" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Henkilo_Osasto" Association="Self.FK_Henkilo_Osasto">
+            <End Role="Osasto" EntitySet="Osasto" />
+            <End Role="Henkilo" EntitySet="Henkilo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tuntikirjaus_Henkilo" Association="Self.FK_Tuntikirjaus_Henkilo">
+            <End Role="Henkilo" EntitySet="Henkilo" />
+            <End Role="Tuntikirjaus" EntitySet="Tuntikirjaus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tuntikirjaus_Projekti" Association="Self.FK_Tuntikirjaus_Projekti">
+            <End Role="Projekti" EntitySet="Projekti" />
+            <End Role="Tuntikirjaus" EntitySet="Tuntikirjaus" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TuntikirjausModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Henkilo">
+          <Key>
+            <PropertyRef Name="henkilo_id" />
+          </Key>
+          <Property Name="henkilo_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="etunimi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="sukunimi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="osasto_id" Type="Int32" Nullable="false" />
+          <Property Name="tehtavanimike" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Osasto" Relationship="Self.FK_Henkilo_Osasto" FromRole="Henkilo" ToRole="Osasto" />
+          <NavigationProperty Name="Tuntikirjaukset" Relationship="Self.FK_Tuntikirjaus_Henkilo" FromRole="Henkilo" ToRole="Tuntikirjaus" />
+        </EntityType>
+        <EntityType Name="Osasto">
+          <Key>
+            <PropertyRef Name="osasto_id" />
+          </Key>
+          <Property Name="osasto_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nimi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Henkilo" Relationship="Self.FK_Henkilo_Osasto" FromRole="Osasto" ToRole="Henkilo" />
+        </EntityType>
+        <EntityType Name="Projekti">
+          <Key>
+            <PropertyRef Name="projekti_id" />
+          </Key>
+          <Property Name="projekti_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nimi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tuntikirjaus" Relationship="Self.FK_Tuntikirjaus_Projekti" FromRole="Projekti" ToRole="Tuntikirjaus" />
+        </EntityType>
+        <EntityType Name="Tuntikirjaus">
+          <Key>
+            <PropertyRef Name="tuntikirjaus_id" />
+          </Key>
+          <Property Name="tuntikirjaus_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="henkilo_id" Type="Int32" Nullable="false" />
+          <Property Name="projekti_id" Type="Int32" Nullable="false" />
+          <Property Name="pvm" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="tunnit" Type="Decimal" Precision="3" Scale="1" Nullable="false" />
+          <Property Name="kuvaus" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="laskutettava" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Henkilo" Relationship="Self.FK_Tuntikirjaus_Henkilo" FromRole="Tuntikirjaus" ToRole="Henkilo" />
+          <NavigationProperty Name="Projekti" Relationship="Self.FK_Tuntikirjaus_Projekti" FromRole="Tuntikirjaus" ToRole="Projekti" />
+        </EntityType>
+        <Association Name="FK_Henkilo_Osasto">
+          <End Role="Osasto" Type="Self.Osasto" Multiplicity="1" />
+          <End Role="Henkilo" Type="Self.Henkilo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Osasto">
+              <PropertyRef Name="osasto_id" />
+            </Principal>
+            <Dependent Role="Henkilo">
+              <PropertyRef Name="osasto_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tuntikirjaus_Henkilo">
+          <End Role="Henkilo" Type="Self.Henkilo" Multiplicity="1" />
+          <End Role="Tuntikirjaus" Type="Self.Tuntikirjaus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Henkilo">
+              <PropertyRef Name="henkilo_id" />
+            </Principal>
+            <Dependent Role="Tuntikirjaus">
+              <PropertyRef Name="henkilo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tuntikirjaus_Projekti">
+          <End Role="Projekti" Type="Self.Projekti" Multiplicity="1" />
+          <End Role="Tuntikirjaus" Type="Self.Tuntikirjaus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projekti">
+              <PropertyRef Name="projekti_id" />
+            </Principal>
+            <Dependent Role="Tuntikirjaus">
+              <PropertyRef Name="projekti_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TuntikirjausEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Henkilot" EntityType="Self.Henkilo" />
+          <EntitySet Name="Osastot" EntityType="Self.Osasto" />
+          <EntitySet Name="Projektit" EntityType="Self.Projekti" />
+          <EntitySet Name="Tuntikirjaukset" EntityType="Self.Tuntikirjaus" />
+          <AssociationSet Name="FK_Henkilo_Osasto" Association="Self.FK_Henkilo_Osasto">
+            <End Role="Osasto" EntitySet="Osastot" />
+            <End Role="Henkilo" EntitySet="Henkilot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tuntikirjaus_Henkilo" Association="Self.FK_Tuntikirjaus_Henkilo">
+            <End Role="Henkilo" EntitySet="Henkilot" />
+            <End Role="Tuntikirjaus" EntitySet="Tuntikirjaukset" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tuntikirjaus_Projekti" Association="Self.FK_Tuntikirjaus_Projekti">
+            <End Role="Projekti" EntitySet="Projektit" />
+            <End Role="Tuntikirjaus" EntitySet="Tuntikirjaukset" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TuntikirjausModelStoreContainer" CdmEntityContainer="TuntikirjausEntities">
+          <EntitySetMapping Name="Henkilot">
+            <EntityTypeMapping TypeName="TuntikirjausModel.Henkilo">
+              <MappingFragment StoreEntitySet="Henkilo">
+                <ScalarProperty Name="henkilo_id" ColumnName="henkilo_id" />
+                <ScalarProperty Name="etunimi" ColumnName="etunimi" />
+                <ScalarProperty Name="sukunimi" ColumnName="sukunimi" />
+                <ScalarProperty Name="osasto_id" ColumnName="osasto_id" />
+                <ScalarProperty Name="tehtavanimike" ColumnName="tehtavanimike" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Osastot">
+            <EntityTypeMapping TypeName="TuntikirjausModel.Osasto">
+              <MappingFragment StoreEntitySet="Osasto">
+                <ScalarProperty Name="osasto_id" ColumnName="osasto_id" />
+                <ScalarProperty Name="nimi" ColumnName="nimi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projektit">
+            <EntityTypeMapping TypeName="TuntikirjausModel.Projekti">
+              <MappingFragment StoreEntitySet="Projekti">
+                <ScalarProperty Name="projekti_id" ColumnName="projekti_id" />
+                <ScalarProperty Name="nimi" ColumnName="nimi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tuntikirjaukset">
+            <EntityTypeMapping TypeName="TuntikirjausModel.Tuntikirjaus">
+              <MappingFragment StoreEntitySet="Tuntikirjaus">
+                <ScalarProperty Name="tuntikirjaus_id" ColumnName="tuntikirjaus_id" />
+                <ScalarProperty Name="henkilo_id" ColumnName="henkilo_id" />
+                <ScalarProperty Name="projekti_id" ColumnName="projekti_id" />
+                <ScalarProperty Name="pvm" ColumnName="pvm" />
+                <ScalarProperty Name="tunnit" ColumnName="tunnit" />
+                <ScalarProperty Name="kuvaus" ColumnName="kuvaus" />
+                <ScalarProperty Name="laskutettava" ColumnName="laskutettava" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
