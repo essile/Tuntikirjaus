@@ -6,10 +6,21 @@
 
 <h2>Tuntikirjaus</h2>
 
-@using (Html.BeginForm()) 
+@if (ViewBag.Onnistui != null)
+{
+    if (ViewBag.Onnistui)
+    {
+        <p>Onnistui</p>
+    }
+    else
+    {
+        <p>ei onnistunut</p>
+    }
+}
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Tuntikirjaus</h4>
         <hr />

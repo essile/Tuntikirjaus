@@ -31,6 +31,7 @@ namespace Tuntikirjaus.Controllers
         public ActionResult Tuntikirjaus()
         {
             ViewBag.Message = "Uusi tuntikirjaus";
+            ViewBag.Onnistui = null;
             ViewData["henkilo_id"] = DataAccess.HaeHenkiloIdt();
             ViewData["projekti_id"] = DataAccess.HaeProjektiIdt();
 
@@ -41,7 +42,10 @@ namespace Tuntikirjaus.Controllers
         public ActionResult Tuntikirjaus(Models.Tuntikirjaus t)
         {
             ViewBag.Message = "Uusi tuntikirjaus";
-            DataAccess.LisaaTuntikirjaus(t);
+            ViewBag.Onnistui = DataAccess.LisaaTuntikirjaus(t);
+            
+            ViewData["henkilo_id"] = DataAccess.HaeHenkiloIdt();
+            ViewData["projekti_id"] = DataAccess.HaeProjektiIdt();
 
             return View();
         }
